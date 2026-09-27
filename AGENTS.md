@@ -15,9 +15,8 @@
 
 ## 명령
 
-M0에서 프로젝트를 만든 뒤 실제 scripts와 일치시킨다.
-
-- `npm run lint` · `npm run typecheck` · `npm run test` · `npm run format`
+- 검사: `npm run lint` · `npm run format:check` · `npm run typecheck` · `npm test` · `npm run doctor` (CI와 동일)
+- 포맷 적용: `npm run format`
 - 패키지는 `npx expo install <패키지>`로 설치한다 (SDK 호환 버전 선택). 의존성·설정 점검은 `npx expo-doctor`.
 - 네이티브 모듈 때문에 Expo Go로 실행할 수 없다. Development Build를 EAS 클라우드로 빌드한다 (`eas build --profile development --platform android`).
 - 카메라 기능은 에뮬레이터로 검증할 수 없다. 실기기 확인이 필요한 변경은 PR에 확인 필요 항목을 적는다.
@@ -49,4 +48,5 @@ Expo는 SDK마다 API가 바뀐다. Expo·EAS·React Native API를 쓰기 전에
 - `main`에 직접 커밋·push하지 않는다. `main`에서 `<타입>/<설명>` 브랜치를 만든다 (예: `feat/face-box`).
 - 커밋과 PR 제목은 `<타입>: <한글 요약>` 형식이다. 타입: `feat` `fix` `docs` `refactor` `test` `chore` `ci`.
 - PR 본문은 한글로 쓰고 변경 내용, 테스트 방법, 관련 문서 항목을 적는다.
+- push 전에 로컬에서 검사 명령을 모두 통과시킨다. PR을 만든 뒤 `gh pr checks <번호> --watch`로 CI를 기다리고, 실패하면 고쳐서 통과시킨 다음 보고한다.
 - 브랜치 생성 · 커밋 · push · PR 생성까지만 한다. **머지, 태그, GitHub Release, force push는 하지 않는다.**
