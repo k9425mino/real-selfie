@@ -7,7 +7,14 @@
     "icon": "./assets/images/icon.png",
     "scheme": "realselfie",
     "userInterfaceStyle": "dark",
+    "ios": {
+      "bundleIdentifier": "com.k9425mino.realselfie"
+    },
     "android": {
+      "package": "com.k9425mino.realselfie",
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#000000",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -30,6 +37,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "325436f1-b73e-43e7-ae4b-548f27dbc4ea"
+      }
+    },
+    "owner": "k9425mino"
   }
 }
