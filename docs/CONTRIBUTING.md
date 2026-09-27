@@ -3,7 +3,7 @@
 | 항목 | 내용 |
 |---|---|
 | 작업자 | 개인 개발자 1인 + AI 에이전트 |
-| 관련 문서 | [PRD.md](./PRD.md), [TECH_SPEC.md](./TECH_SPEC.md), [AGENTS.md](../AGENTS.md) |
+| 관련 문서 | [PRD.md](./PRD.md), [TECH_SPEC.md](./TECH_SPEC.md), [milestones](./milestones/README.md), [AGENTS.md](../AGENTS.md) |
 
 ## 1. 브랜치
 
@@ -41,7 +41,7 @@
 - **본문**은 한글로 쓰고, 다음 내용을 포함한다.
   - 무엇을 왜 바꿨는지
   - 테스트 방법 (카메라 관련 변경은 실기기 확인 여부 — [TECH_SPEC §11.2](./TECH_SPEC.md#112-실기기-수동-테스트))
-  - 관련 문서 항목 (예: PRD F4, TECH_SPEC §6)
+  - 관련 문서 항목 (예: PRD F4, TECH_SPEC §6, M4)
 - **머지 조건**: CI(`lint` · `typecheck` · `test`, [TECH_SPEC §12](./TECH_SPEC.md#12-개발-도구--ci)) 통과.
 - **머지 방식**: squash merge만 사용한다. 머지 후 브랜치는 삭제한다.
 - GitHub Issue는 현재 사용하지 않는다.
