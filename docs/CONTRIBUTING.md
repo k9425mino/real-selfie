@@ -42,7 +42,8 @@
   - 무엇을 왜 바꿨는지
   - 테스트 방법 (카메라 관련 변경은 실기기 확인 여부 — [TECH_SPEC §11.2](./TECH_SPEC.md#112-실기기-수동-테스트))
   - 관련 문서 항목 (예: PRD F4, TECH_SPEC §6, M4)
-- **머지 조건**: CI(`lint` · `typecheck` · `test`, [TECH_SPEC §12](./TECH_SPEC.md#12-개발-도구--ci)) 통과.
+- **머지 조건**: CI `verify` 체크(lint · 포맷 · typecheck · test · expo-doctor, [TECH_SPEC §12](./TECH_SPEC.md#12-개발-도구--ci)) 통과.
+- 에이전트는 PR을 만든 뒤 CI 결과를 기다리고, 실패하면 같은 브랜치에서 고쳐 통과시킨 다음 보고한다.
 - **머지 방식**: squash merge만 사용한다. 머지 후 브랜치는 삭제한다.
 - GitHub Issue는 현재 사용하지 않는다.
 
@@ -73,7 +74,7 @@
 
 - Branch protection (`main`)
   - Require a pull request before merging (승인 수 0)
-  - Require status checks to pass — CI 작업 추가 후 해당 체크 지정
+  - Require status checks to pass — `verify`
   - Block force pushes
 - Pull Requests
   - Allow squash merging만 허용, 기본 메시지는 PR 제목

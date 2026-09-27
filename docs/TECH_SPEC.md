@@ -327,9 +327,11 @@ type SessionState = {
 
 ## 12. 개발 도구 & CI
 
-- ESLint: `expo lint` 기본 설정 + Prettier (`eslint-config-prettier`로 충돌 제거).
-- npm scripts: `lint`, `typecheck` (`tsc --noEmit`), `test` (`jest`), `format`.
-- GitHub Actions (PR · main push): `npm ci` → `lint` → `typecheck` → `test`.
+- ESLint: `eslint-config-expo` flat config + `eslint-plugin-prettier/recommended`. 경고도 실패로 처리한다 (`--max-warnings 0`).
+- Prettier: 작은따옴표, 세미콜론, 폭 100 (`.prettierrc.json`). 한글 표 정렬이 깨지는 `*.md`는 제외한다.
+- 줄바꿈: `.gitattributes`로 작업 폴더에서도 LF를 사용한다 (Windows에서 Prettier 검사 실패 방지).
+- npm scripts: `lint`, `format`, `format:check`, `typecheck` (`tsc --noEmit`), `test` (`jest`, `jest-expo` preset), `doctor` (`expo-doctor`, 버전 고정). 테스트 파일은 대상 파일 옆 `*.test.ts`에 둔다. 첫 테스트가 생기기 전까지 `--passWithNoTests`를 쓴다.
+- GitHub Actions `CI` 워크플로의 `verify` 작업 (PR · main push, Node 24): `npm ci` → `lint` → `format:check` → `typecheck` → `test` → `doctor`.
 - EAS Build는 수동: `eas build --profile <profile> --platform <android|ios>`.
 
 ## 13. 빌드 & 배포
