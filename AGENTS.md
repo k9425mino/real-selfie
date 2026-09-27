@@ -18,7 +18,8 @@
 M0에서 프로젝트를 만든 뒤 실제 scripts와 일치시킨다.
 
 - `npm run lint` · `npm run typecheck` · `npm run test` · `npm run format`
-- 네이티브 모듈 때문에 Expo Go로 실행할 수 없다. Development Build를 사용한다.
+- 패키지는 `npx expo install <패키지>`로 설치한다 (SDK 호환 버전 선택). 의존성·설정 점검은 `npx expo-doctor`.
+- 네이티브 모듈 때문에 Expo Go로 실행할 수 없다. Development Build를 EAS 클라우드로 빌드한다 (`eas build --profile development --platform android`).
 - 카메라 기능은 에뮬레이터로 검증할 수 없다. 실기기 확인이 필요한 변경은 PR에 확인 필요 항목을 적는다.
 
 ## 핵심 규칙
@@ -27,6 +28,12 @@ M0에서 프로젝트를 만든 뒤 실제 scripts와 일치시킨다.
 - 촬영 요청은 접수 시 모드와 크롭을 고정하며, 이후 UI 상태로 다시 해석하지 않는다 (TECH_SPEC §7).
 - 사진·얼굴 인식 결과·사용 기록을 외부로 전송하는 코드를 추가하지 않는다 (PRD §6).
 - 사용자에게 보이는 문구는 하드코딩하지 않고 i18n 키(`ko`/`en`)로 작성한다 (TECH_SPEC §10).
+- `src/app/`에는 라우트 파일만 둔다. 기능 코드는 `src/features/`, 공용 코드는 `src/shared/`에 둔다 (TECH_SPEC §3).
+- `ios/`·`android/`는 CNG로 생성되므로 직접 만들거나 수정하지 않는다. 네이티브 설정은 `app.json`과 config plugin으로 한다.
+
+## Expo 문서
+
+Expo는 SDK마다 API가 바뀐다. Expo·EAS·React Native API를 쓰기 전에 기억에 의존하지 말고, `package.json`의 `expo` 메이저 버전에 맞는 문서(`https://docs.expo.dev/versions/v<메이저>.0.0/`)나 https://docs.expo.dev/llms.txt 를 확인한다.
 
 ## 문서 갱신
 

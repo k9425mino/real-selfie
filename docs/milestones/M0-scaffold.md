@@ -2,7 +2,7 @@
 
 | 항목 | 내용 |
 |---|---|
-| 상태 | 대기 |
+| 상태 | 진행 중 |
 | PRD | F7 (기반) |
 | TECH_SPEC | §1, §3, §10, §12, §13 |
 | 선행 | — |
@@ -13,7 +13,7 @@
 
 ## 작업
 
-- [ ] Expo 프로젝트 생성: TypeScript `strict`, Expo Router 단일 라우트 `app/index.tsx`, `ios/`·`android/` gitignore (§3)
+- [x] Expo 프로젝트 생성: TypeScript `strict`, Expo Router 단일 라우트 `src/app/index.tsx`, `ios/`·`android/` gitignore (§3)
 - [ ] 의존성 설치·버전 고정: `npx expo install`로 호환 버전 선택, 호환 조합과 최소 OS를 §1에 기록 (§15 #1)
 - [ ] `app.json` 기본 설정: 앱 식별자, 세로 고정, 어두운 배경, 카메라 권한 문구(한/영), 마이크 권한 비활성화 (§5, §8)
 - [ ] 린트·포맷·테스트: ESLint(`expo lint`)·Prettier·Jest와 npm scripts `lint` `typecheck` `test` `format` (§12)
