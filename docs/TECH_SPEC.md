@@ -30,7 +30,7 @@
 |---|---|
 | 프레임워크 | Expo (CNG + Development Build), React Native New Architecture |
 | 언어 / 패키지 매니저 | TypeScript (`strict: true`) / npm |
-| 라우팅 | Expo Router (단일 라우트 `app/index.tsx`) |
+| 라우팅 | Expo Router (단일 라우트 `src/app/index.tsx`) |
 | 카메라 | `react-native-vision-camera` (최신, Nitro 기반) |
 | 얼굴 인식 | `react-native-vision-camera-face-detector` (ML Kit, 온디바이스) |
 | 애니메이션 / 오버레이 | `react-native-reanimated` (shared value) |
@@ -61,10 +61,10 @@
 ## 3. 프로젝트 구조
 
 ```
-app/
-  _layout.tsx              # 폰트/i18n 초기화, SettingsProvider
-  index.tsx                # 카메라 화면 (유일한 라우트)
 src/
+  app/                     # Expo Router 라우트 (SDK 템플릿 기본 위치). 라우트 외 코드는 두지 않음
+    _layout.tsx            # 폰트/i18n 초기화, SettingsProvider
+    index.tsx              # 카메라 화면 (유일한 라우트)
   features/
     camera/
       CameraScreen.tsx     # 화면 조립
