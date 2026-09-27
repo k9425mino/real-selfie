@@ -47,7 +47,25 @@
 | CI | GitHub Actions (lint · typecheck · test), EAS Build는 수동 실행 |
 | 모니터링 | 원격 분석·오류 수집 없음. 개발 시 로컬 측정만 사용 |
 
-> 상호 호환되는 최신 안정 버전 조합을 선정하고 실제 빌드 후 `package.json`과 lockfile에 고정한다. Expo SDK 호환 패키지는 `npx expo install`로 설치한다. 최소 OS는 Expo·카메라·얼굴 인식 등 모든 의존성 요구사항을 만족하는 범위로 정한다. 정확한 버전·최소 OS·네이티브 플러그인 설정은 아직 미확정이다 (§15 #1). 아래 API 이름과 코드는 설계 개념이며 선정 버전의 공식 API와 대조한다.
+> 상호 호환되는 최신 안정 버전 조합을 선정하고 실제 빌드 후 `package.json`과 lockfile에 고정한다. Expo SDK 호환 패키지는 `npx expo install`로 설치한다. 최소 OS는 Expo·카메라·얼굴 인식 등 모든 의존성 요구사항을 만족하는 범위로 정한다. 아래 API 이름과 코드는 설계 개념이며 선정 버전의 공식 API와 대조한다.
+
+### 1.1 확정 버전 (§15 #1)
+
+M0에서 EAS Android development 빌드 성공으로 확인한 조합이다. 정확한 버전은 `package.json`과 lockfile이 기준이며, 서드파티 네이티브 패키지는 범위 없이 고정하고 수동으로 업그레이드한다.
+
+| 패키지 | 버전 | 비고 |
+|---|---|---|
+| Expo SDK | 57 (`expo` ~57.0.25) | React Native 0.86.3, React 19.2.3 |
+| `react-native-reanimated` / `react-native-worklets` | 4.5.1 / 0.10.1 | SDK 번들 버전 |
+| `react-native-vision-camera` | 5.2.3 | config plugin 없음 → 권한은 `app.json`에 직접 선언 |
+| `react-native-vision-camera-worklets` | 5.2.3 | frame output용 |
+| `react-native-vision-camera-face-detector` | 2.1.0 | `useFaceDetectorOutput` 제공 |
+| `react-native-nitro-modules` / `react-native-nitro-image` | 0.37.1 / 0.15.2 | VisionCamera 필수 의존성 |
+| `react-native-mmkv` | 4.3.2 | |
+
+- 최소 OS: Android minSdk 24, target/compile SDK 36 (Expo 기본값). iOS 최소 버전은 M9에서 확정한다.
+- 빌드 성공은 컴파일 호환성만 확인한 것이다. 카메라·얼굴 인식의 런타임 동작은 M1에서 검증한다.
+- `react-dom`은 앱에서 쓰지 않지만 선택적 peer 해석 충돌을 막기 위해 SDK 버전(19.2.3)으로 둔다.
 
 ## 2. 개발 환경 제약
 
@@ -343,7 +361,7 @@ type SessionState = {
 
 | # | 상태 | 항목 | 현재 방침 | 결정 시점 | 기록 위치 |
 |---|---|---|---|---|---|
-| 1 | 미정 | 버전 조합·최소 OS | Expo SDK·RN·VisionCamera·얼굴 인식 플러그인·Reanimated/worklets·MMKV의 호환 최신 안정 버전을 공식 문서와 실제 빌드로 확정 | M0 | `package.json`, lockfile, §1 |
+| 1 | 확정 (iOS 최소 버전 제외) | 버전 조합·최소 OS | Expo SDK 57 조합을 Android 빌드로 확정 (§1.1). iOS 최소 버전은 M9 | M0 | `package.json`, lockfile, §1.1 |
 | 2 | 미정 | 저장 API·Android 저장 권한 | 선정 버전의 MediaLibrary 저장 API와 OS별 권한 필요 여부 확인. 구 API 이름을 그대로 쓰지 않음 | M3 | §7, §8 |
 | 3 | 미정 | 반전 가정 1~4 (Android) | §4.4 가정과 추가 확인 항목을 S23에서 검증 | M1 | `docs/SPIKE_MIRRORING.md` |
 | 4 | 미정 | 반전 가정 1~4 (iOS) | 첫 TestFlight 빌드에서 동일 항목 검증 | M9 | `docs/SPIKE_MIRRORING.md` |

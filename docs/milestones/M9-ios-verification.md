@@ -15,7 +15,7 @@ Android 출시 후 iOS 실기기에서 반전·촬영·얼굴 박스를 포함�
 
 - [ ] Apple Developer Program 가입 (개발자)
 - [ ] TestFlight 배포용 EAS 프로필 확인 (store 배포 설정, §13)
-- [ ] iOS 권한 문구(`Info.plist` 한/영) 확인 (§8)
+- [ ] iOS 권한 문구(`Info.plist` 한/영) 결정·추가 (§8). M0에서는 설정하지 않았다. VisionCamera 5는 기본 문구를 제공하지 않으며, 문구가 없으면 카메라 접근 시 앱이 종료되고 심사도 거절된다
 - [ ] 첫 TestFlight 빌드에서 §4.4 반전 가정 검증, `docs/SPIKE_MIRRORING.md`에 iOS 섹션 추가 (§15 #4)
 - [ ] iOS 차이 수정 (네이티브 커스텀 코드 최소화)
 - [ ] 지인 iPhone에서 TEST_PLAN 실행과 결과 기록
