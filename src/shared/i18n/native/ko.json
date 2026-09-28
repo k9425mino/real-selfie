@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "CFBundleDisplayName": "리얼셀피"
+  },
+  "android": {
+    "app_name": "리얼셀피"
+  }
+}
