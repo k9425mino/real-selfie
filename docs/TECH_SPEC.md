@@ -109,6 +109,7 @@ src/
       i18next.d.ts         # 번역 키 타입
       ko.json
       en.json
+      native/              # 앱 이름·권한 문구 등 네이티브 메타데이터 (app.json `locales`)
     ui/                    # 공용 버튼, 아이콘 버튼 등
 __tests__/                 # 또는 각 파일 옆 *.test.ts
 ```
@@ -297,7 +298,7 @@ type SessionState = {
 - 실행 중 언어 변경: 루트 레이아웃의 `useDeviceLanguage()`가 `useLocales()` 변화를 감지해 `changeLanguage`를 호출한다. Android는 config plugin 기본값(`allowDynamicLocaleChangesAndroid`)으로 액티비티 재생성 없이 변경을 받는다.
 - Android 앱별 언어: config plugin `supportedLocales: ["ko", "en"]`로 `locales_config.xml`을 생성해 시스템 설정에 노출한다.
 - 문자열은 `src/shared/i18n/{ko,en}.json`. `i18next.d.ts`에서 `en.json`을 기준으로 키 타입을 선언해 오타를 컴파일 단계에서 잡고, `ko`와 `en`의 키 일치는 Jest로 검사한다.
-- 앱 표시 이름: 한국어 `리얼셀피`, 영어 `Real Selfie` (config plugin locales).
+- 앱 표시 이름: 한국어 `리얼셀피`, 영어 `Real Selfie`. 기본값은 `app.json`의 `name`(영어)이고, 한국어는 `app.json`의 `locales.ko`가 가리키는 `src/shared/i18n/native/ko.json`에서 지정한다 (Android `app_name`, iOS `CFBundleDisplayName`). iOS 표시는 M9에서 확인한다.
 
 ## 11. 테스트
 
@@ -386,7 +387,7 @@ type SessionState = {
 | 16 | 미정 | 최대 해상도와 프리뷰 동시 충족 | 잠정: 충돌 시 최대 해상도 우선, 촬영·저장 중 일시 끊김 허용, 자동 해상도 하향 없음 | M3 측정, M6 재평가 | PRD F5, `docs/TEST_PLAN.md` |
 | 17 | 미정 | 연속 사용 5분 발열·끊김 | 사용 시간 제한은 두지 않음 | M6 | `docs/TEST_PLAN.md` |
 | 18 | 미정 | 중앙 크롭으로 화각이 맞지 않는 기기 보정 | 해결 전에는 WYSIWYG 통과로 처리하지 않음 | M1 발견 시, M7 | `docs/SPIKE_MIRRORING.md` |
-| 19 | 미정 | 권한 문구·앱 이름 다국어 설정 | config plugin locales 방식 확인 | M6 | §8, §10 |
+| 19 | 일부 확정 (앱 이름) | 권한 문구·앱 이름 다국어 설정 | 앱 이름은 `app.json` `locales`로 확정 (§10). 권한 문구는 같은 방식으로 M6에서 확인 | M6 | §8, §10 |
 | 20 | 미정 | 릴리스 빌드 외부 통신 없음 | 분석·오류 수집·자동 업데이트 등 자체 서버 통신 없음 확인. 사용자 주도 OS 공유만 허용 | M8 | `docs/RELEASE.md` |
 | 21 | 미정 | 스토어 요구사항·정책 문구 | Play 비공개 테스트 요건, 개인정보 라벨, 실물 모드 안내 문구(PRD §1)를 출시 시점 공식 자료로 재확인 | Android M8, iOS M10 | `docs/RELEASE.md` |
 

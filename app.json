@@ -21,6 +21,9 @@
       },
       "predictiveBackGestureEnabled": false
     },
+    "locales": {
+      "ko": "./src/shared/i18n/native/ko.json"
+    },
     "plugins": [
       "expo-router",
       [
