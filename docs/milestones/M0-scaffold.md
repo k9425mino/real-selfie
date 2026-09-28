@@ -18,7 +18,7 @@
 - [x] `app.json` 기본 설정: 앱 식별자, 세로 고정, 어두운 배경, 카메라 권한(Android), 마이크 권한 없음 (§5, §8). iOS 권한 문구는 M9에서 결정
 - [x] 린트·포맷·테스트: ESLint(`expo lint`)·Prettier·Jest와 npm scripts (§12)
 - [x] GitHub Actions CI: PR·main push에서 lint·포맷·typecheck·test·expo-doctor (§12)
-- [ ] i18n 기반: `expo-localization` + i18next, `ko.json`/`en.json`, 타입이 있는 키 (§10)
+- [x] i18n 기반: `expo-localization` + i18next, `ko.json`/`en.json`, 타입이 있는 키 (§10)
 - [x] EAS 설정: `eas.json`에 `development`·`preview`·`production` 프로필 (§13)
 - [x] `AGENTS.md`의 명령 섹션을 실제 scripts와 일치시킴
 
@@ -26,8 +26,8 @@
 
 ## 완료 조건
 
-- [ ] PR에서 CI `verify`가 통과한다
-- [ ] branch protection에 CI 체크가 필수로 지정되었다 ([CONTRIBUTING §6](../CONTRIBUTING.md#6-github-저장소-설정))
+- [x] PR에서 CI `verify`가 통과한다
+- [x] branch protection에 CI 체크가 필수로 지정되었다 ([CONTRIBUTING §6](../CONTRIBUTING.md#6-github-저장소-설정))
 - [ ] (실기기) S23에 development build를 설치하고, i18n 키로 표시한 문구 한 줄이 기기 언어에 따라 한/영으로 보인다
 - [ ] (실기기) 코드 수정 시 핫 리로드가 동작한다
 

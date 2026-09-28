@@ -104,7 +104,9 @@ src/
       SettingsContext.tsx  # 설정 상태 + MMKV 동기화
       storage.ts           # MMKV 인스턴스, 키 정의
     i18n/
-      index.ts
+      index.ts             # i18next 인스턴스, 기기 언어 동기화 훅
+      language.ts          # 기기 언어 → ko/en (순수 함수, 테스트 대상)
+      i18next.d.ts         # 번역 키 타입
       ko.json
       en.json
     ui/                    # 공용 버튼, 아이콘 버튼 등
@@ -292,7 +294,9 @@ type SessionState = {
 ## 10. 다국어
 
 - `expo-localization`으로 기기 언어 감지 → `ko`면 한국어, 그 외 영어 (fallback `en`).
-- 문자열은 `src/shared/i18n/{ko,en}.json`. 키는 TypeScript 타입으로 선언해 오타를 컴파일 단계에서 잡음.
+- 실행 중 언어 변경: 루트 레이아웃의 `useDeviceLanguage()`가 `useLocales()` 변화를 감지해 `changeLanguage`를 호출한다. Android는 config plugin 기본값(`allowDynamicLocaleChangesAndroid`)으로 액티비티 재생성 없이 변경을 받는다.
+- Android 앱별 언어: config plugin `supportedLocales: ["ko", "en"]`로 `locales_config.xml`을 생성해 시스템 설정에 노출한다.
+- 문자열은 `src/shared/i18n/{ko,en}.json`. `i18next.d.ts`에서 `en.json`을 기준으로 키 타입을 선언해 오타를 컴파일 단계에서 잡고, `ko`와 `en`의 키 일치는 Jest로 검사한다.
 - 앱 표시 이름: 한국어 `리얼셀피`, 영어 `Real Selfie` (config plugin locales).
 
 ## 11. 테스트
@@ -331,6 +335,7 @@ type SessionState = {
 - Prettier: 작은따옴표, 세미콜론, 폭 100 (`.prettierrc.json`). 한글 표 정렬이 깨지는 `*.md`는 제외한다.
 - 줄바꿈: `.gitattributes`로 작업 폴더에서도 LF를 사용한다 (Windows에서 Prettier 검사 실패 방지).
 - npm scripts: `lint`, `format`, `format:check`, `typecheck` (`tsc --noEmit`), `test` (`jest`, `jest-expo` preset), `doctor` (`expo-doctor`, 버전 고정). 테스트 파일은 대상 파일 옆 `*.test.ts`에 둔다. 첫 테스트가 생기기 전까지 `--passWithNoTests`를 쓴다.
+- TypeScript 6은 `types` 기본값이 빈 배열이므로 `tsconfig.json`에 `"types": ["jest"]`를 지정해 테스트 전역 타입을 포함한다.
 - GitHub Actions `CI` 워크플로의 `verify` 작업 (PR · main push, Node 24): `npm ci` → `lint` → `format:check` → `typecheck` → `test` → `doctor`.
 - EAS Build는 수동: `eas build --profile <profile> --platform <android|ios>`.
 
